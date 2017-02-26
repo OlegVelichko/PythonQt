@@ -1,27 +1,19 @@
-class InputData(object):
-
-    def __init__(self, number, power):
-        self.number = number
-        self.power = power
-
-    def sqrNumber(self):
-        return pow(self.number, self.power)
+def decorate(func):
+   def func_wrapper(self):
+       return "<p>-{0}-</p>".format(func(self))
+   return func_wrapper
 
 
-class OutputData(object):
+class Person(object):
+    def __init__(self):
+        self.name = "John"
+        self.family = "Wick"
 
-    def __init__(self, num):
-        self.num = num
+    @decorate
+    def get_full_name(self):
+        return self.name + ' ' + self.family
 
-    def rez(self):
-        print(str(number) + '^' + str(power) + ' = ' + str(self.num.sqrNumber()))
 
-if __name__ == "__main__":
+my_person = Person()
 
-    number = int(input("Number: "))
-    power = int(input("Power: "))
-
-    num = InputData(number, power)
-    show = OutputData(num)
-
-    show.rez()
+print(my_person.get_full_name())
